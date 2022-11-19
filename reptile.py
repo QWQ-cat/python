@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def PTT_Gossiping():
+def PTT_Gossiping(n):
     url = 'https://www.ptt.cc/'
     web = requests.get(
-        'https://www.ptt.cc/bbs/Gossiping/index.html', cookies={'over18': '1'})
+        'https://www.ptt.cc/bbs/Gossiping/index%d.html' % n, cookies={'over18': '1'})
     soup = BeautifulSoup(web.text, 'html5lib')
     titles = soup.find_all('div', class_='title')
 
@@ -15,9 +15,9 @@ def PTT_Gossiping():
             print(url+i.find('a')['href'], end='\n\n')
 
 
-def WorldCup():
+def WorldCup(n):
     url = 'https://www.ptt.cc/'
-    web = requests.get('https://www.ptt.cc/bbs/WorldCup/index.html')
+    web = requests.get('https://www.ptt.cc/bbs/WorldCup/index%d.html' % n)
     soup = BeautifulSoup(web.text, 'html5lib')
     titles = soup.find_all('div', class_='title')
     for j in titles:
@@ -26,10 +26,10 @@ def WorldCup():
             print(url+j.find('a')['href'], end='\n\n')
 
 
-def Beauty():
+def Beauty(n):
     url = 'https://www.ptt.cc/'
     web = requests.get(
-        'https://www.ptt.cc/bbs/Beauty/index.html', cookies={'over18': '1'})
+        'https://www.ptt.cc/bbs/Beauty/index%d.html' % n, cookies={'over18': '1'})
     soup = BeautifulSoup(web.text, 'html5lib')
     titles = soup.find_all('div', class_='title')
     for k in titles:
@@ -39,10 +39,10 @@ def Beauty():
 
 
 text = input("想爬蟲的板:")
-
+page_num = int(input("想爬的頁面:"))
 if text == '八卦版':
-    PTT_Gossiping()
+    PTT_Gossiping(page_num)
 elif text == '世界盃':
-    WorldCup()
+    WorldCup(page_num)
 elif text == '表特版':
-    Beauty()
+    Beauty(page_num)

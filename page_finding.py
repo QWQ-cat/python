@@ -7,9 +7,9 @@ web = requests.get("https://www.ptt.cc/bbs/Beauty/index%d.html" %
                    page_num, cookies={'over18': '1'})
 soup = BeautifulSoup(web.text, 'html5lib')
 titles = soup.find_all('div', class_='title')
-content = soup.find_all('div', class_1='bbs-screen.bbs-content')
-if content == '404 - Not Found.':
-    print("找無此頁面")
+#content = soup.find_all('div', class_="bbs-screen.bbs-content")
+if len(titles)==0:
+    print("404 Not Found.")
 else:
     for i in titles:
         if i.find('a') != None:

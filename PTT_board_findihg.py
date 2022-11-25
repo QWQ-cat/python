@@ -14,7 +14,7 @@ print(board_name, end=' ')
 print(board_class, end='*')
 print(board_title, end='~')
 '''
-
+# https://ithelp.ithome.com.tw/articles/10228998?sc=pt
 for i in board_name:
     if i.find('board-name') != None:
         print(board_name[i], ' ', hot[i], ' ',

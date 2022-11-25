@@ -4,7 +4,7 @@ page_num = int(input("輸入你想要尋找的頁數(頭)"))
 page_num_1 = int(input("輸入你想要尋找的頁數(尾)"))
 url = 'https://www.ptt.cc/'
 for j in reversed(range(page_num_1, page_num)):
-    web = requests.get("https://www.ptt.cc/bbs/sex/index%d.html" %
+    web = requests.get("https://www.ptt.cc/bbs/worldcup/index%d.html" %
                        j, cookies={'over18': '1'})
     soup = BeautifulSoup(web.text, 'html5lib')
     titles = soup.find_all('div', class_='title')

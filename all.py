@@ -163,7 +163,7 @@ board_word = {'八卦': 'Gossiping',
               '兄弟': 'Elephants',
               'XBOX': 'XBOX',
               '藝文票卷轉售板': 'Drama-Ticket',
-              '獵人': 'Hunter',
+              '獵人': 'Hunter',  # 我打到這裡，你從下一行開始 by蔡桐榮
               '婚姻': 'marriage',
               '美容': 'MakeUp',
               '米哈': 'miHoYo',

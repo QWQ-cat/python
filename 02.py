@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 url = 'https://www.ptt.cc/'
-web = requests.get(
-    'https://www.ptt.cc/bbs/Gossiping/index.html', cookies={'over18': '1'})
+web = requests.get('https://www.ptt.cc/bbs/Worldcup/index.html')
 soup = BeautifulSoup(web.text, 'html5lib')
 titles = soup.find_all('div', class_='title')
 

@@ -33,7 +33,7 @@ def PTT_page_finding_newest(board):
             print(url+i.find('a')['href'], end='\n\n')
 
 
-def PTT_page_finding_select(board):
+def PTT_page_finding_select(board,page_num):
     page_num = int(input("輸入你想要尋找的頁數"))
     url = 'https://www.ptt.cc/'
     web = requests.get("https://www.ptt.cc/bbs/%s/index%d.html" % board %
@@ -105,3 +105,17 @@ def PTT_board_finding():
 
 def help():
     print("")
+
+
+command_ = str(input("Please type the command you need:"))
+if command_=="help":
+    help()
+elif command_=="boardfinding":
+    PTT_board_finding()
+elif command_=="pagefinding":
+    board_1=str(input("Please type the board you want to find:"))
+    PTT_page_finding_newest(board_1)
+elif command_=="pageselect":
+    board_2=str(input("Please type the board you want to find:"))
+    page_num=int(input("Please type the page number you want to find:"))
+    PTT_page_finding_select(board_2,page_num)

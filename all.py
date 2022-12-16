@@ -33,7 +33,7 @@ def PTT_page_finding_newest(board):
             print(url+i.find('a')['href'], end='\n\n')
 
 
-def PTT_page_finding_select(board,page_num):
+def PTT_page_finding_select(board, page_num):
     page_num = int(input("輸入你想要尋找的頁數"))
     url = 'https://www.ptt.cc/'
     web = requests.get("https://www.ptt.cc/bbs/%s/index%d.html" % board %
@@ -85,8 +85,9 @@ def PTT_page_finding_select_specific(board):
                     print(i.find('a').get_text())
                     print(url+i.find('a')['href'], end='\n\n')
 
+
 def PTT_board_finding():
-    hotpage = requests.get('https://www.ptt.cc/bbs/hotboards.html')  
+    hotpage = requests.get('https://www.ptt.cc/bbs/hotboards.html')
     soup = BeautifulSoup(hotpage.text, 'html5lib')
     # print(soup)
     board_find = soup.find_all('a', class_='board')
@@ -103,19 +104,42 @@ def PTT_board_finding():
         print("看板網址：" + header_url)
         print('\n\n')
 
+
 def help():
-    print("")
+    print("help: list the commands")
+    print("\n")
+    print("*********************************")
+    print("1: board finding")
+    print("\n")
+    print("*********************************")
+    print("2: page finding (newest)")
+    print("\n")
+    print("*********************************")
+    print("3: page finding (particular page)")
+    print("\n")
+    print("*********************************")
+    print("4: page finding (form the oldest to you chose)")
+    print("\n")
+    print("*********************************")
+    print("5: page finding (particular pages from 'a' to 'b')")
 
 
-command_ = str(input("Please type the command you need:"))
-if command_=="help":
-    help()
-elif command_=="boardfinding":
-    PTT_board_finding()
-elif command_=="pagefinding":
-    board_1=str(input("Please type the board you want to find:"))
-    PTT_page_finding_newest(board_1)
-elif command_=="pageselect":
-    board_2=str(input("Please type the board you want to find:"))
-    page_num=int(input("Please type the page number you want to find:"))
-    PTT_page_finding_select(board_2,page_num)
+command_ = str(input())
+while command_ != "0":
+    command_ = str(input())
+    if command_ == "help":
+        help()
+    elif command_ == "1":
+        PTT_board_finding()
+    elif command_ == "2":
+        board = str(input("which board do you want to find: "))
+        PTT_page_finding_newest(board)
+    elif command_ == "3":
+        board = str(input("which board do you want to find: "))
+        PTT_page_finding_select(board)
+    elif command_ == "4":
+        board = str(input("which board do you want to find: "))
+        PTT_page_finding_select_formHead(board)
+    elif command_ == "5":
+        board = str(input("which board do you want to find: "))
+        PTT_page_finding_select_specific(board)

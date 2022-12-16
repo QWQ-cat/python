@@ -33,15 +33,15 @@ def PTT_page_finding_newest(board):
             print(url+i.find('a')['href'], end='\n\n')
 
 
-def PTT_page_finding_select(board, page_num):
-    page_num = int(input("輸入你想要尋找的頁數"))
+def PTT_page_finding_select(board):
+    page_num = int(input("輸入你想要尋找的頁數"))  # 輸入想尋找的頁數
     url = 'https://www.ptt.cc/'
-    web = requests.get("https://www.ptt.cc/bbs/%s/index%d.html" % board %
-                       page_num, cookies={'over18': '1'})
+    web = requests.get("https://www.ptt.cc/bbs/%s/index%d.html" %
+                       (board, page_num), cookies={'over18': '1'})
     soup = BeautifulSoup(web.text, 'html5lib')
     titles = soup.find_all('div', class_='title')
     if len(titles) == 0:
-        print("404 Not Found.")
+        print("404 Not Found.")  # 如果伺服器未回應，便提醒用戶端
     else:
         for i in titles:
             if i.find('a') != None:
@@ -54,7 +54,7 @@ def PTT_page_finding_select_formHead(board):
     url = 'https://www.ptt.cc/'
     for j in range(1, page_num):
         web = requests.get("https://www.ptt.cc/bbs/%s/index%d.html" %
-                           board % j, cookies={'over18': '1'})
+                           (board, j), cookies={'over18': '1'})
         soup = BeautifulSoup(web.text, 'html5lib')
         titles = soup.find_all('div', class_='title')
         if len(titles) == 0:
@@ -73,7 +73,7 @@ def PTT_page_finding_select_specific(board):
     url = 'https://www.ptt.cc/'
     for j in reversed(range(page_num_1, page_num)):
         web = requests.get("https://www.ptt.cc/bbs/%s/index%d.html" %
-                           board % j, cookies={'over18': '1'})
+                           (board, j), cookies={'over18': '1'})
         soup = BeautifulSoup(web.text, 'html5lib')
         titles = soup.find_all('div', class_='title')
         if len(titles) == 0:
@@ -84,25 +84,6 @@ def PTT_page_finding_select_specific(board):
                 if i.find('a') != None:
                     print(i.find('a').get_text())
                     print(url+i.find('a')['href'], end='\n\n')
-
-
-def PTT_board_finding():
-    hotpage = requests.get('https://www.ptt.cc/bbs/hotboards.html')
-    soup = BeautifulSoup(hotpage.text, 'html5lib')
-    # print(soup)
-    board_find = soup.find_all('a', class_='board')
-    for board in board_find:
-        header_name = board.find('div', class_='board-name')
-        print("看板名稱：", header_name.text)
-        header_page = board.select('span')[0]
-        print("看板分類文章數：", header_page.text)
-        header_classes = board.find('div', class_='board-class')
-        print("看板分類：", header_classes.text)
-        header_title = board.select('div.board-title')[0]
-        print("看板標題：", header_title.text)
-        header_url = 'https://www.ptt.cc' + board['href']
-        print("看板網址：" + header_url)
-        print('\n\n')
 
 
 def help():
@@ -124,7 +105,6 @@ def help():
     print("5: page finding (particular pages from 'a' to 'b')")
 
 
-command_ = str(input())
 while command_ != "0":
     command_ = str(input())
     if command_ == "help":
